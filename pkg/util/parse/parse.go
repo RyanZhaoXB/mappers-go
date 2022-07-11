@@ -365,6 +365,7 @@ func ParseByUsingRegister(cfg *config.Config,
 	devices map[string]*common.DeviceInstance,
 	dms map[string]common.DeviceModel,
 	protocols map[string]common.Protocol) error {
+	klog.Infoln("======parse device and model from register")
 	deviceList, deviceModelList, err := register.RegisterMapper(cfg, true)
 	if err != nil {
 		return err
