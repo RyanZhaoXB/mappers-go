@@ -160,7 +160,7 @@ func buildPropertyVisitorsFromGrpc(device *dmiapi.Device) []common.PropertyVisit
 		cur := common.PropertyVisitor{
 			Name:          pptv.PropertyName,
 			PropertyName:  pptv.PropertyName,
-			ModelName:     device.Spec.GetDeviceModelRef(),
+			ModelName:     device.Spec.DeviceModelReference,
 			CollectCycle:  pptv.GetCollectCycle(),
 			ReportCycle:   pptv.GetReportCycle(),
 			Protocol:      protocolName,
@@ -232,7 +232,7 @@ func ParseDeviceFromGrpc(device *dmiapi.Device, commonModel *common.DeviceModel)
 		ID:               device.GetName(),
 		Name:             device.GetName(),
 		ProtocolName:     protocolName + "-" + device.GetName(),
-		Model:            device.Spec.GetDeviceModelRef(),
+		Model:            device.Spec.DeviceModelReference,
 		Twins:            buildTwinsFromGrpc(device),
 		Datas:            buildDataFromGrpc(device),
 		PropertyVisitors: buildPropertyVisitorsFromGrpc(device),

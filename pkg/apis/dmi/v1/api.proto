@@ -101,7 +101,7 @@ message Device {
 }
 
 message DeviceSpec {
-    string deviceModelRef = 1;
+    string deviceModelReference = 1;
     ProtocolConfig protocol = 2;
     repeated DevicePropertyVisitor propertyVisitors = 3;
 }
