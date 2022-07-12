@@ -384,8 +384,8 @@ func ParseByUsingRegister(cfg *config.Config,
 
 	for _, device := range deviceList {
 		klog.Infof("======ParseByUsingRegister device %+v", device)
-		commonModel := modelMap[device.Spec.GetDeviceModelRef()]
-		klog.Infof("======get model from map, ref key: %s, value: %+v", device.Spec.GetDeviceModelRef(), commonModel)
+		commonModel := modelMap[device.Spec.DeviceModelRef]
+		klog.Infof("======get model from map, ref key: %s, value: %+v", device.Spec.DeviceModelRef, commonModel)
 		protocol, err := BuildProtocolFromGrpc(device)
 		if err != nil {
 			return err

@@ -157,21 +157,12 @@ func buildPropertyVisitorsFromGrpc(device *dmiapi.Device) []common.PropertyVisit
 			}
 		}
 
-		collectCycle, err := strconv.ParseInt(pptv.GetCollectCycle(), 10, 64)
-		if err != nil {
-			collectCycle = common.DefaultCollectCycle.Nanoseconds()
-		}
-		reportCycle, err := strconv.ParseInt(pptv.GetReportCycle(), 10, 64)
-		if err != nil {
-			reportCycle = common.DefaultReportCycle.Nanoseconds()
-		}
-
 		cur := common.PropertyVisitor{
 			Name:          pptv.PropertyName,
 			PropertyName:  pptv.PropertyName,
 			ModelName:     device.Spec.GetDeviceModelRef(),
-			CollectCycle:  collectCycle,
-			ReportCycle:   reportCycle,
+			CollectCycle:  pptv.GetCollectCycle(),
+			ReportCycle:   pptv.GetReportCycle(),
 			Protocol:      protocolName,
 			VisitorConfig: visitorConfig,
 		}
