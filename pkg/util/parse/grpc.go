@@ -29,6 +29,7 @@ func getProtocolNameFromGrpc(device *dmiapi.Device) (string, error) {
 }
 
 func BuildProtocolFromGrpc(device *dmiapi.Device) (common.Protocol, error) {
+	klog.Infof("======BuildProtocolFromGrpc device %+v", device)
 	protocolName, err := getProtocolNameFromGrpc(device)
 	if err != nil {
 		return common.Protocol{}, err
