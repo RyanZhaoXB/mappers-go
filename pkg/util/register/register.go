@@ -60,6 +60,7 @@ func RegisterMapper(cfg *config.Config, withData bool) ([]*dmiapi.Device, []*dmi
 		return nil, nil, err
 	}
 	fmt.Println("======send grpc to edgecore for mapperRegister finished")
+	fmt.Printf("======register response: %+v", resp)
 
 	return resp.DeviceList, resp.ModelList, err
 }
