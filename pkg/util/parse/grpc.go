@@ -181,6 +181,7 @@ func buildPropertyVisitorsFromGrpc(device *dmiapi.Device) []common.PropertyVisit
 }
 
 func ParseDeviceModelFromGrpc(model *dmiapi.DeviceModel) common.DeviceModel {
+	klog.Infof("======ParseDeviceModelFromGrpc model %+v", model)
 	cur := common.DeviceModel{
 		Name: model.GetName(),
 	}
