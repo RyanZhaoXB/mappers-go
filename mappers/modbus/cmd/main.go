@@ -71,6 +71,10 @@ func main() {
 		time.Sleep(2 * time.Second)
 		i++
 		klog.Infof("retry to init device, time: %d", i)
+		if i == 5 {
+			klog.Infof("retry 5 times. break")
+			break
+		}
 	}
 
 	klog.Infoln("devInit finished")
@@ -93,9 +97,15 @@ func main() {
 			Protocol: common.ProtocolModbus,
 		},
 	)
-	go grpcServer.Start()
-	klog.Infoln("grpc server start finished")
+	//go grpcServer.Start()
+	//klog.Infoln("grpc server start finished")
 	go httpserver.StartHttpServer(c.HttpServer.Host)
 	klog.Infoln("http server start finished")
 	panel.DevStart()
+
+	err = grpcServer.Start()
+	if err != nil {
+		klog.Errorf("fail to start grpc server with err: %+v", err)
+	}
+	klog.Infoln("grpc server start finished")
 }
