@@ -368,6 +368,8 @@ func (d *DevPanel) UpdateDev(model *common.DeviceModel, device *common.DeviceIns
 	d.deviceMuxs[device.ID] = cancelFunc
 	d.wg.Add(1)
 	go d.start(ctx, d.devices[device.ID])
+	klog.Infof("deviceMuxs: %+v", d.deviceMuxs)
+	klog.Infof("devices: %+v", d.devices)
 }
 
 func (d *DevPanel) stopDev(id string) error {
@@ -437,5 +439,9 @@ func (d *DevPanel) GetDevice(deviceID string) (interface{}, error) {
 }
 
 func (d *DevPanel) RemoveDevice(deviceID string) error {
+	delete(d.devices, deviceID)
+	klog.Infof("deviceMuxs: %+v", d.deviceMuxs)
+	klog.Infof("devices: %+v", d.devices)
+	klog.Infof("delete device %s", deviceID)
 	return d.stopDev(deviceID)
 }

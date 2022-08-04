@@ -44,6 +44,7 @@ func (s *Server) CreateDevice(ctx context.Context, request *dmiapi.CreateDeviceR
 	// publish device to mqtt
 	//topic := dtcommon.MemETPrefix + d.NodeName + dtcommon.MemETUpdateSuffix
 
+	klog.Infof("success to add device %s", device.Name)
 	return &dmiapi.CreateDeviceResponse{DeviceName: device.Name}, nil
 }
 
