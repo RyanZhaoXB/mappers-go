@@ -88,7 +88,21 @@ function package() {
   echo "packaging mapper ${mapper}..."
 
   local image_name="${mapper}-mapper"
-  local tag=v1.0
+  
+  if [[ -n "$2" ]]; then
+    local tag=$2
+  else
+    local tag=v1.0
+  fi
+  
+  array_arg=$2
+  array=(${array_arg/ / })
+  if [[ ${#array[@]} > 1 ]]; then
+    local tag=${array[0]}
+    local repository_name=${array[1]}
+  else 
+    local repository_name=""
+  fi
 
   local platform
   if [[ "${ARM:-false}" == "true" ]]; then
@@ -109,10 +123,20 @@ function package() {
   fi
 
   local image_tag="${image_name}:${tag}-${platform////-}"
-  echo "packaging ${image_tag}"
-  sudo docker build \
-    --platform "${platform}" \
-    -t "${image_tag}" .
+
+  if [[ -n "$repository_name" ]]; then
+    echo "packaging ${repository_name}/${image_tag} and push to dockerhub"
+    sudo docker build \
+      --platform "${platform}" \
+      -t "${repository_name}/${image_tag}" . 
+    sudo docker push "${repository_name}/${image_tag}"
+  else
+    echo "packaging ${image_tag}"
+      sudo docker build \
+      --platform "${platform}" \
+      -t "${image_tag}" .
+  fi
+
   popd >/dev/null 2>&1
 
   echo "...done"
