@@ -52,20 +52,14 @@ jobs:
         run: make all package ${{ github.ref_name }}
           
       - name: Push ble Mapper Image
-        run: bash hack/make-rules/pushimage.sh ble ${{ github.ref_name }} linux-amd64 mayday
-        working-directory: ./src/github.com/${{ github.repository }}
+        run: bash ./hack/make-rules/pushimage.sh ble ${{ github.ref_name }} linux-amd64 mayday
       - name: Push modbus Mapper Image
         run: bash hack/make-rules/pushimage.sh modbus ${{ github.ref_name }} linux-amd64 mayday
-        working-directory: ./src/github.com/${{ github.repository }}
       - name: Push modbus-dmi Mapper Image
         run: bash hack/make-rules/pushimage.sh modbus-dmi ${{ github.ref_name }} linux-amd64 mayday
-        working-directory: ./src/github.com/${{ github.repository }}
       - name: Push opcua Mapper Image
         run: bash hack/make-rules/pushimage.sh opcua ${{ github.ref_name }} linux-amd64 mayday
-        working-directory: ./src/github.com/${{ github.repository }}
       - name: Push onvif Mapper Image
         run: bash hack/make-rules/pushimage.sh onvif ${{ github.ref_name }} linux-amd64 mayday
-        working-directory: ./src/github.com/${{ github.repository }}
       - name: Push gige Mapper Image
         run: bash hack/make-rules/pushimage.sh gige ${{ github.ref_name }} linux-amd64 mayday
-        working-directory: ./src/github.com/${{ github.repository }}
