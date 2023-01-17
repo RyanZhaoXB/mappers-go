@@ -14,7 +14,7 @@ on:
     types: [published]
 
 jobs:
-  prepare:
+  push docker image to dockerhub:
     name: Push Docker image to Docker Hub
     runs-on: ubuntu-latest
     steps:
@@ -39,11 +39,7 @@ jobs:
 
       - name: Check out the repo
         uses: actions/checkout@v3
-        
-  build-image:
-    name: Build Images of Mappers
-    runs-on: ubuntu-latest
-    steps:    
+          
       - name: Log in to Docker Hub
         uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
         with:
@@ -54,11 +50,7 @@ jobs:
         env: 
           IMAGE_REPO_NAME: mayday
         run: make all package ${{ github.ref_name }}
-
-  push-image:
-    name: Push Images of Mappers to DockerHub
-    runs-on: ubuntu-latest
-    steps:           
+          
       - name: Push ble Mapper Image
         run: bash hack/make-rules/pushimage.sh ble ${{ github.ref_name }} linux-amd64 mayday
         working-directory: ./src/github.com/${{ github.repository }}
