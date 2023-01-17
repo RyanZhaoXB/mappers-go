@@ -55,8 +55,6 @@ jobs:
         run: bash ./hack/make-rules/pushimage.sh ble ${{ github.ref_name }} linux-amd64 mayday
       - name: Push modbus Mapper Image
         run: bash hack/make-rules/pushimage.sh modbus ${{ github.ref_name }} linux-amd64 mayday
-      - name: Push modbus-dmi Mapper Image
-        run: bash hack/make-rules/pushimage.sh modbus-dmi ${{ github.ref_name }} linux-amd64 mayday
       - name: Push opcua Mapper Image
         run: bash hack/make-rules/pushimage.sh opcua ${{ github.ref_name }} linux-amd64 mayday
       - name: Push onvif Mapper Image
