@@ -14,7 +14,7 @@ on:
     types: [published]
 
 jobs:
-  push docker image to dockerhub:
+  push-docker-image-to-dockerhub:
     name: Push Docker image to Docker Hub
     runs-on: ubuntu-latest
     steps:
