@@ -53,25 +53,27 @@ jobs:
       - name: Build Docker image
         env: 
           IMAGE_REPO_NAME: mayday
-        run: make mapper all package ${{ github.ref_name }}
+        run: make all package ${{ github.ref_name }}
 
   push-image:
     name: Push Images of Mappers to DockerHub
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        target:
-          - ble-mapper
-          - modbus-mapper
-          - modbus-dmi-mapper
-          - onvif-mapper
-          - opcua-mapper
-          - gige-mapper
-        os:
-          - linux
-        arch:
-          - amd64
     steps:           
-      - name: Push Mapper Image
-        run: bash hack/make-rules/pushimage.sh ${{ matrix.target }} ${{ github.ref_name }} ${{ matrix.target }}-${{ matrix.arch }} mayday
+      - name: Push ble Mapper Image
+        run: bash hack/make-rules/pushimage.sh ble ${{ github.ref_name }} linux-amd64 mayday
+        working-directory: ./src/github.com/${{ github.repository }}
+      - name: Push modbus Mapper Image
+        run: bash hack/make-rules/pushimage.sh modbus ${{ github.ref_name }} linux-amd64 mayday
+        working-directory: ./src/github.com/${{ github.repository }}
+      - name: Push modbus-dmi Mapper Image
+        run: bash hack/make-rules/pushimage.sh modbus-dmi ${{ github.ref_name }} linux-amd64 mayday
+        working-directory: ./src/github.com/${{ github.repository }}
+      - name: Push opcua Mapper Image
+        run: bash hack/make-rules/pushimage.sh opcua ${{ github.ref_name }} linux-amd64 mayday
+        working-directory: ./src/github.com/${{ github.repository }}
+      - name: Push onvif Mapper Image
+        run: bash hack/make-rules/pushimage.sh onvif ${{ github.ref_name }} linux-amd64 mayday
+        working-directory: ./src/github.com/${{ github.repository }}
+      - name: Push gige Mapper Image
+        run: bash hack/make-rules/pushimage.sh gige ${{ github.ref_name }} linux-amd64 mayday
         working-directory: ./src/github.com/${{ github.repository }}
