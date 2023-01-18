@@ -48,7 +48,7 @@ jobs:
       
       - name: Build Docker image
         env: 
-          IMAGE_REPO_NAME: kubeedge
+          IMAGE_REPO_NAME: mayday
         run: make all package ${{ github.ref_name }}
           
       - name: Push ble Mapper Image
